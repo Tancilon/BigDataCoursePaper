@@ -1,0 +1,28 @@
+# LaTeX auxiliary/build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.ilg
+*.idx
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
+# latexmk output
+*.pdfsync
+
+# macOS/Linux noise
+.DS_Store
+Thumbs.db

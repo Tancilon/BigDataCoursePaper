@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{gbt7714}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{cases}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{color}
+
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\ttfamily,            % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\ttfamily\color{mygreen},    
+                                   % comment style
+  deletekeywords={},               % if you want to delete keywords from the given language
+  escapeinside={},                 % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=C++,                    % the language of the code
+  morekeywords={library,use},                 % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+\lstdefinelanguage{VHDL}{
+  morekeywords={
+    library,use,all,entity,is,port,in,out,end,architecture,of,
+    begin,and
+  },
+  morecomment=[l]--
+}
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \ttfamily,
+  keywordstyle = \color{keyword}\bfseries,
+  commentstyle = \color{comment}
+}
+
+\setlength{\parindent}{0em}
+\geometry{a4paper,scale=0.8}
+\linespread{1.5}
+\graphicspath{{Images/}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\vspace*{0.5cm}
+\linespread{1.2}\huge {\bfseries Fudan University}\\[0.4cm]
+\linespread{1}
+\includegraphics[width=7cm]{fudan-name.pdf}\\[1cm]
+\linespread{1.5}\LARGE {\bfseries kafka系统介绍}\\[0.2cm]
+\linespread{1.5}\Large {\bfseries 大数据管理技术课程报告}\\[1.2cm]
+
+{\large 姓名：\hspace{2cm} 学号:}\\[0.2cm]
+{\large 姓名：\hspace{2cm} 学号:}\\[0.2cm]
+{\large 姓名：\hspace{2cm} 学号:}\\[0.2cm]
+{\large 姓名：\hspace{2cm} 学号:}\\[0.2cm]
+{\large 姓名：\hspace{2cm} 学号:}\\[1.5cm]
+\normalsize 2025年11月23日
+\end{center}
+\end{titlepage}
+
+% 摘要
+\begin{abstract}
+本报告系统性地介绍了Apache Kafka分布式流处理平台的核心机制与技术原理。报告从系统背景出发，深入分析了Kafka的分区与副本机制、生产者幂等性保证、端到端一致性语义与事务机制、Broker内部存储与调度机制，以及消费者组的负载均衡策略。通过对这些核心机制的研究，全面展示了Kafka如何实现高吞吐、高可用、强一致的消息传递服务。
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% 引入各章节内容
+\input{section1_zhangkanshao.tex}
+\clearpage
+\input{section2_fanzicheng.tex}
+\clearpage
+\input{section3_dengqi.tex}
+\clearpage
+\input{section4_fengyuebo.tex}
+\clearpage
+\input{section5_zhengchenguang.tex}
+
+% 总结
+\section{总结与展望}
+本报告系统性地介绍了Kafka的核心技术机制。通过对分区副本、生产消费、一致性保证、存储调度等关键技术的深入分析，我们全面理解了Kafka作为分布式流处理平台的技术优势。未来，Kafka在云原生、实时计算等领域仍有广阔的应用前景。
+
+% 参考文献
+\newpage
+\nocite{*}
+\bibliographystyle{gbt7714-numerical}
+\bibliography{ref}
+
+\end{document}
