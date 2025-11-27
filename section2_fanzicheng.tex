@@ -4,18 +4,34 @@
 \hspace{2em}本章节主要围绕Kafka Producer的工作原理展开，重点介绍生产者发送消息的流程及其可靠性保证机制。随后，在介绍了为何引入幂等性机制后深入探讨Kafka如何通过引入Producer ID和Sequence Number来实现消息发送的幂等性，确保在网络异常或重试情况下不会产生重复消息。最后，分析幂等性机制的局限性及其适用范围。
 \subsection{生产者工作原理}
 % 生产者的消息发送流程、分区选择策略
+    \subsubsection{生产者消息发送流程}
+    
+    \subsubsection{分区选择策略}
 
 \subsection{消息发送的可靠性保证}
 % acks参数、重试机制、超时处理
+    \subsubsection{acks参数}
+
+    \subsubsection{重试机制}
+
+    \subsubsection{超时处理}
 
 \subsection{幂等性问题的产生}
 % 什么是幂等性、为什么需要幂等性
+    \subsubsection{幂等性的定义}
 
+    \subsubsection{重复发送消息的问题}
 \subsection{Kafka的幂等性实现机制}
 % Producer ID、Sequence Number、幂等性的实现原理
+    \subsubsection{实现幂等性的相关机制}
+
+    \subsubsection{ACK机制对比实验}
 
 \subsection{幂等性的局限性}
 % 单分区幂等性、会话级别的限制
+    \subsubsection{单分区幂等性}
 
+    \subsubsection{会话级别限制}
+    
 \subsection{小结}
 % 本章总结
