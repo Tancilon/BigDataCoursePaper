@@ -28,6 +28,14 @@ Kafka在生产者侧引入了一系列可配置的可靠性保障机制，本节
     \subsubsection{acks参数}
 \hspace{2em}在Kafka生产者的消息发送过程中，acks参数用于控制生产者在发送消息后，何时可以认为该消息已经成功写入Kafka集群。不同的acks配置决定了Leader Broker在返回确认ACK之前需要满足的写入条件，从而在消息发送的可靠性和系统性能之间形成不同的权衡。
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{ack0}
+  \includegraphics[width=0.45\textwidth]{ack1}
+  \includegraphics[width=0.45\textwidth]{ackall}
+  \caption{三种ack机制示意图}
+\end{figure}
+
 \hspace{2em}当acks设置为0时，生产者在将消息发送给Broker后不等待任何确认响应，即认为消息已经发送成功。此时生产者不会关心消息是否真正被Broker接收或写入，因此消息发送的延迟最低、吞吐性能最高，但一旦发生网络异常或Broker故障，消息极有可能丢失。这种配置通常只适用于对数据可靠性要求较低的场景。
 
 \hspace{2em}当acks设置为1时，生产者会等待Leader Broker将消息写入本地日志后返回确认。在该模式下，消息至少能够保证被Leader接收，但如果Leader在消息尚未复制到其他副本之前发生故障，仍然可能导致消息丢失。相比acks=0，该模式在可靠性上有所提升，但仍存在一定风险。
