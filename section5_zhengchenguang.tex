@@ -16,9 +16,17 @@ Kafka的消费者组（Consumer Group）是其实现高可用与水平扩展的�
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.45\textwidth]{5-2}
+  \caption{Range策略}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
   \includegraphics[width=0.45\textwidth]{5-3}
+  \caption{RoundRobin策略}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
   \includegraphics[width=0.45\textwidth]{5-4}
-  \caption{三种分配策略}
+  \caption{Sticky策略}
 \end{figure}
 再平衡（Rebalance）是消费者组为应对成员变更或Topic元数据变化而自动发起的分区重新分配过程。它的触发条件主要包括新消费者加入、旧消费者离开（无论正常或异常），以及所订阅Topic的分区数量发生变更。传统的“Eager”再平衡过程可以概括为三个步骤：所有成员先向协调器发送JoinGroup请求并放弃已有分区；协调器选出其中一个消费者作为Leader；最后由Leader制定具体的分配方案，经协调器同步给全体成员。这个过程虽然保障了一致性，但代价是消费的全局暂停，在分区数众多或网络不佳时，停顿时间可能长达数秒甚至更久，进而引发消息堆积与延迟上升。
 
