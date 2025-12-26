@@ -84,10 +84,16 @@
 \end{center}
 \end{titlepage}
 
-% 摘要
-\begin{abstract}
-本报告系统性地介绍了Apache Kafka分布式流处理平台的核心机制与技术原理。报告从系统背景出发，深入分析了Kafka的分区与副本机制、生产者幂等性保证、端到端一致性语义与事务机制、Broker内部存储与调度机制，以及消费者组的负载均衡策略。通过对这些核心机制的研究，全面展示了Kafka如何实现高吞吐、高可用、强一致的消息传递服务。
-\end{abstract}
+
+\section*{分工说明}
+本报告各章节的分工如下：
+\begin{itemize}
+  \item 引言与系统背景：张瞰劭
+  \item 生产者机制与幂等性保证：范子成
+  \item 端到端一致性语义与事务机制：邓奇
+  \item Broker内部机制：存储与调度：冯跃博
+  \item 消费者组与负载均衡机制：郑晨光
+\end{itemize}
 
 \tableofcontents
 \newpage
