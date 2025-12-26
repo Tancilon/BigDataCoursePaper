@@ -52,11 +52,6 @@ Kafka 生产者是数据写入链路的入口，其参数配置在很大程度�
 为获得更强的一致性，\texttt{acks=all}（或 \texttt{acks=-1}）要求 Leader 等待 ISR 中所有同步副本均完成写入后才返回确认，是实现“不丢数据”目标的重要基础。然而，仅设置 \texttt{acks=all} 并不足以消除退化风险：当 ISR 缩减到仅剩 Leader（例如 Follower 滞后或宕机）时，\texttt{acks=all} 实际将退化为 \texttt{acks=1}。因此，生产环境通常需配合 \texttt{min.insync.replicas} 约束最小同步副本数，以在副本不足时拒绝写入请求并返回 \texttt{NotEnoughReplicasException}。例如，当 \texttt{replication.factor=3} 且 \texttt{min.insync.replicas=2} 时，正常情况下 Leader 至少等待一个 Follower 同步成功后确认写入；若两个 Follower 同时不可用导致 ISR 仅剩 Leader，则写入将被拒绝，从而体现系统在故障条件下以降低可用性换取一致性的设计取舍%
 \footnote{上述配置与概念均来自 Kafka 官方文档：Producer 配置（含 \texttt{acks} 等）见 \url{https://kafka.apache.org/41/configuration/producer-configs/}；Topic 配置（含 \texttt{min.insync.replicas}、副本/ISR 相关说明及典型示例）见 \url{https://kafka.apache.org/41/configuration/topic-configs/}。}。
 
-
-
-
-\subsubsection{幂等性生产者}
-
 为了解决由于网络抖动或超时重试引发的消息重复与乱序问题，Apache Kafka 引入了幂等性生产者机制。该机制通过在生产端与 Broker 之间建立严格的消息去重与顺序校验规则，从而在无需应用层干预的情况下保证消息写入的幂等性。
 
 
@@ -145,7 +140,7 @@ Kafka 所提供的EOS语义并非由单一功能直接实现，而是由幂等�
 
 因此，在工程实践中通常避免长事务并将外部慢依赖（如远程 RPC）移出事务临界区；结合业务处理时延合理设置事务超时，以减少意外中止；通过批处理与适度聚合提高每次事务提交涵盖的消息量，从而降低单位消息的事务开销；同时为事务相关内部主题提供足够的副本与同步副本集合保障，避免协调器与事务日志成为可用性与性能瓶颈。通过上述策略，可以在可接受的性能代价下获得更强的一致性保证。
 
-\subsection{结论}
+\subsection{小结}
 
 Kafka 通过幂等性写入、日志化的事务协调与轻量级两阶段提交流程，在无需外部事务管理器的条件下，为分布式事件流处理提供了可落地的端到端一致性语义。尽管 EOS 在吞吐与延迟维度上引入了额外成本，但对于金融结算、精确计费、库存扣减等对正确性高度敏感的场景，该成本通常可被视为必要的工程代价。随着事务协议与运行时实现的持续优化，Kafka 的强一致性能力正在从“高要求场景的可选项”逐步演进为现代数据密集型应用的基础配置。
 
